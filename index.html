@@ -11,21 +11,23 @@
 <body>
     <header>
         <h1 class="text-center">Weather Dashboard</h1>
-        <main class="flex-row justify-space-between">
-            <div class="col-12 col-md-4">
-                <div class="card">
-                    <h3 class="card-header">Search for a City:</h3>
+    </header>
+    <main class="flex-row justify-space-between">
+        <div class="col-12 col-md-4">
+            <div class="card">
+                <h3 class="card-header">Search for a City:</h3>
+                <form id="user-form">
                     <input name="city" id="city" type="text" autofocus="true" class="form-input"/>
                     <button type="submit" class="btn">Search</button>
-                </div>
-                <div class="prev-search"></div>
+                </form> 
             </div>
-            <div class="col-12 col-md-8">
-                <div class="city-weather">
-                </div>
-                <div class="5D-Forecast"></div>
+            <div class="prev-search"></div>
+        </div>
+        <div class="col-12 col-md-8">
+            <div class="city-weather">
             </div>
-        </main>
-    </header>
+            <div class="5D-Forecast"></div>
+        </div>
+    </main>
 </body>
 </html>
