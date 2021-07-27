@@ -32,6 +32,9 @@ h1{
     border: 2px solid var(--gray);
     border-radius: var(--border-radius);
 }
+.city-weather{
+    background-color: var(--light);
+}
 .flex-row {
     display: flex;
     flex-wrap: wrap;
