@@ -2,7 +2,7 @@ var userFormEl = document.querySelector("#user-form");
 var cityInputEl = document.querySelector("#city");
 var prevSearchEl = document.querySelector("#prev-search");
 var cityWeatherEl = document.querySelector("#weather-today");
-var city5DEl = document.querySelector("#5D-Forecast");
+var city5DEl = document.querySelector("#forecast5");
 
 var formSubmitHandler = function(event){
     // prevent page from refreshing
