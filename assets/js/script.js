@@ -64,6 +64,7 @@ var getTodaysWeather = function(weather, location){
         alert("Unable to connect to OpenWeather");
       });
 };
+
 var displayTodaysWeather = function(weather, location){
     //check if api returned info
     if(weather.length === 0){
