@@ -12,17 +12,17 @@ var formSubmitHandler = function(event){
 
     if(cityName){
 
-        getTodaysWeather(cityName);
+        getLatLon(cityName);
     }
     else{
         alert("Please enter a city");
     }
 };
 
-var getTodaysWeather = function(city){
+var getLatLon = function(city){
     //format openWeather api url
-    var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=4cbd25328987295e23b007fb7a00499b";
-    
+    var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q="+city+"&units=imperial&appid=4cbd25328987295e23b007fb7a00499b";
+
     //make a get request to url
     fetch(apiUrl)
     .then(function(response) {
@@ -30,8 +30,8 @@ var getTodaysWeather = function(city){
         if (response.ok) {
           console.log(response);
           response.json().then(function(data) {
-            console.log(data);
-            displayTodaysWeather(data.items);
+              console.log(data);
+            getTodaysWeather(data, city);
           });
         } else {
           alert("Error: " + response.statusText);
@@ -41,12 +41,30 @@ var getTodaysWeather = function(city){
         alert("Unable to connect to OpenWeather");
       });
 };
-var displayTodaysWeather = function(weather){
-    // check if api returned any weather
-    if(weather.length === 0){
-        cityWeatherEl.textContent = "No city found.";
-        return;
-    }
+var getTodaysWeather = function(weather, location){
+    var lat= weather.coord.lat;
+    var lon=weather.coord.lon;
+    var apiUrl2="https://api.openweathermap.org/data/2.5/onecall?lat="+lat+"&lon="+lon+"&exclude=minutely,hourly,daily,alerts&appid=4cbd25328987295e23b007fb7a00499b";
+    //make a get request to url
+    fetch(apiUrl2)
+    .then(function(response) {
+        // request was successful
+        if (response.ok) {
+          console.log(response);
+          response.json().then(function(data) {
+              console.log(data);
+            displayTodaysWeather(data, city);
+          });
+        } else {
+          alert("Error: " + response.statusText);
+        }
+      })
+      .catch(function(error) {
+        alert("Unable to connect to OpenWeather");
+      });
 };
+var displayTodaysWeather= function(weather, location){
+    console.log(weather);
+}
 
 userFormEl.addEventListener("submit", formSubmitHandler);
