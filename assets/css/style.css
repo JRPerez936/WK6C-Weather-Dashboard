@@ -1,7 +1,7 @@
 * {
     box-sizing: border-box;
 }
-h1{
+.main-header{
     background-image: linear-gradient(.25turn,#3b6ec4, #230555);
     color: white;
 }
@@ -34,6 +34,7 @@ h1{
 }
 .city-weather{
     background-color: var(--light);
+    border: 1px solid var(--gray);
 }
 .flex-row {
     display: flex;

@@ -41,10 +41,11 @@ var getLatLon = function(city){
         alert("Unable to connect to OpenWeather");
       });
 };
+
 var getTodaysWeather = function(weather, location){
     var lat= weather.coord.lat;
-    var lon=weather.coord.lon;
-    var apiUrl2="https://api.openweathermap.org/data/2.5/onecall?lat="+lat+"&lon="+lon+"&exclude=minutely,hourly,daily,alerts&appid=4cbd25328987295e23b007fb7a00499b";
+    var lon= weather.coord.lon;
+    var apiUrl2="https://api.openweathermap.org/data/2.5/onecall?lat="+lat+"&lon="+lon+"&exclude=minutely,hourly,daily,alerts&units=imperial&appid=4cbd25328987295e23b007fb7a00499b";
     //make a get request to url
     fetch(apiUrl2)
     .then(function(response) {
@@ -52,8 +53,7 @@ var getTodaysWeather = function(weather, location){
         if (response.ok) {
           console.log(response);
           response.json().then(function(data) {
-              console.log(data);
-            displayTodaysWeather(data, city);
+            displayTodaysWeather(data, location);
           });
         } else {
           alert("Error: " + response.statusText);
@@ -63,8 +63,30 @@ var getTodaysWeather = function(weather, location){
         alert("Unable to connect to OpenWeather");
       });
 };
-var displayTodaysWeather= function(weather, location){
+var displayTodaysWeather = function(weather, location){
+    //check if api returned info
+    if(weather.length === 0){
+        cityWeatherEl.textContent = "No data found.";
+    }
     console.log(weather);
+    //initialize variables where info will be shared
+    var cityEl = document.createElement("h1");
+    var tempEl = document.createElement("h3");
+    var windEl = document.createElement("h3");
+    var humidEl = document.createElement("h3");
+    var uvEl = document.createElement("h3");
+
+    cityEl.textContent = location;
+    tempEl.textContent ="Temp: "+weather.current.temp+ "°F";
+    windEl.textContent ="Wind: "+weather.current.wind_speed;
+    humidEl.textContent ="Humidity: "+weather.current.humidity;
+    uvEl.textContent ="UV Index: "+ weather.current.uvi;
+
+    cityWeatherEl.appendChild(cityEl);
+    cityWeatherEl.appendChild(tempEl);
+    cityWeatherEl.appendChild(windEl);
+    cityWeatherEl.appendChild(humidEl);
+    cityWeatherEl.appendChild(uvEl);
 }
 
 userFormEl.addEventListener("submit", formSubmitHandler);
