@@ -2,6 +2,7 @@ var userFormEl = document.querySelector("#user-form");
 var cityInputEl = document.querySelector("#city");
 var prevSearchEl = document.querySelector("#prev-search");
 var cityWeatherEl = document.querySelector("#weather-today");
+var city5DEl = document.querySelector("#5D-Forecast");
 
 var formSubmitHandler = function(event){
     // prevent page from refreshing
@@ -76,11 +77,14 @@ var displayTodaysWeather = function(weather, location){
     var humidEl = document.createElement("h3");
     var uvEl = document.createElement("h3");
 
+    //set the text of the weather elements
     cityEl.textContent = location;
     tempEl.textContent ="Temp: "+weather.current.temp+ "°F";
-    windEl.textContent ="Wind: "+weather.current.wind_speed;
+    windEl.textContent ="Wind: "+weather.current.wind_speed+ " MPH";
     humidEl.textContent ="Humidity: "+weather.current.humidity;
     uvEl.textContent ="UV Index: "+ weather.current.uvi;
+
+    cityWeatherEl.classList= "city-weather";
 
     cityWeatherEl.appendChild(cityEl);
     cityWeatherEl.appendChild(tempEl);
