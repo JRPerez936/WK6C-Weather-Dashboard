@@ -40,6 +40,16 @@
     background-color: var(--light);
     border: 1px solid var(--gray);
 }
+.uv-green{
+    background-color: var(--success);
+    
+}
+.uv-yellow{
+    background-color: var(--warning);
+}
+.uv-red{
+    background-color: var(--danger);
+}
 .flex-row {
     display: flex;
     flex-wrap: wrap;

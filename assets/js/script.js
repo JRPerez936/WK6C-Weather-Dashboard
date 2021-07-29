@@ -105,9 +105,19 @@ var displayTodaysWeather = function(weather, location){
     var windEl = document.createElement("h3");
     var humidEl = document.createElement("h3");
     var uvEl = document.createElement("h3");
+    var uvNum= document.createElement("span");
     var iconEl = document.createElement("img");
 
     iconEl.setAttribute("src","https://openweathermap.org/img/wn/"+weather.current.weather[0].icon+".png");
+    if(weather.current.uvi>8){
+      uvNum.classList = "uv-red";
+    }
+    else if(weather.current.uvi>5){
+      uvNum.classList = "uv-yellow";
+    }
+    else{
+      uvNum.classList = "uv-green";
+    }
 
     //set the text of the weather elements
     cityEl.textContent = location + " " + timeEl;
@@ -115,7 +125,9 @@ var displayTodaysWeather = function(weather, location){
     tempEl.textContent ="Temp: "+weather.current.temp+ "°F";
     windEl.textContent ="Wind: "+weather.current.wind_speed+ " MPH";
     humidEl.textContent ="Humidity: "+weather.current.humidity + "%";
-    uvEl.textContent ="UV Index: "+ weather.current.uvi;
+    uvEl.textContent ="UV Index: ";
+    uvNum.textContent=" "+weather.current.uvi+ " ";
+    uvEl.appendChild(uvNum);
 
     cityWeatherEl.innerHTML= "";
     cityWeatherEl.classList= "city-weather";
@@ -149,6 +161,7 @@ var get5DWeather = function(city){
 };
 
 var display5DWeather = function(weather){
+    console.log(weather);
     //check if api returned info
     if(weather.length === 0){
         city5DEl.textContent = "No data found.";
