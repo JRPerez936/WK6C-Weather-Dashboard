@@ -75,11 +75,11 @@ var getTodaysWeather = function(weather, location){
 };
 
 var displayTodaysWeather = function(weather, location){
-    console.log(weather);
     //check if api returned info
     if(weather.length === 0){
         cityWeatherEl.textContent = "No data found.";
     }
+
     //initialize variables where info will be shared
     var cityEl = document.createElement("h1");
     var timeEl = moment.unix(weather.current.dt).format("MM/DD/YYYY");
@@ -87,9 +87,13 @@ var displayTodaysWeather = function(weather, location){
     var windEl = document.createElement("h3");
     var humidEl = document.createElement("h3");
     var uvEl = document.createElement("h3");
+    var iconEl = document.createElement("img");
 
+    iconEl.setAttribute("src","https://openweathermap.org/img/wn/"+weather.current.weather[0].icon+".png");
+    console.log(iconEl);
     //set the text of the weather elements
     cityEl.textContent = location + " " + timeEl;
+    cityEl.appendChild(iconEl);
     tempEl.textContent ="Temp: "+weather.current.temp+ "°F";
     windEl.textContent ="Wind: "+weather.current.wind_speed+ " MPH";
     humidEl.textContent ="Humidity: "+weather.current.humidity + "%";
@@ -135,12 +139,16 @@ var display5DWeather = function(weather){
     city5DEl.innerHTML = "";
     
     for(var i = 0; i<=5; i++){
+        console.log(weather);
         var date= document.createElement("p");
         var temp= document.createElement("p");
         var wind= document.createElement("p");
         var humidity= document.createElement("p");
+        var iconEl = document.createElement("img");
+        iconEl.setAttribute("src","https://openweathermap.org/img/wn/"+weather.list[i].weather[0].icon+".png");
 
         date.textContent = moment.unix(weather.list[i].dt).format("MM/DD/YYYY");
+        date.appendChild(iconEl);
         temp.textContent = "Temp: "+ weather.list[i].main.temp + "°F";
         wind.textContent = "Wind: "+ weather.list[i].wind.speed + " MPH";
         humidity.textContent = "Humidity: "+ weather.list[i].main.humidity + "%";
