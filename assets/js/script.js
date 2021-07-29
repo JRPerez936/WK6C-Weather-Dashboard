@@ -31,7 +31,7 @@ var savedSubmitHandler = function(city){
 
 var getLatLon = function(city){
     //format openWeather api url
-    var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q="+city+"&units=imperial&appid=4cbd25328987295e23b007fb7a00499b";
+    var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&units=imperial&appid=4cbd25328987295e23b007fb7a00499b";
 
     //make a get request to url
     fetch(apiUrl)
@@ -107,7 +107,7 @@ var displayTodaysWeather = function(weather, location){
 
 var get5DWeather = function(city){
         //format openWeather api url
-        var apiUrl3 = "http://api.openweathermap.org/data/2.5/forecast?q="+city+"&units=imperial&appid=4cbd25328987295e23b007fb7a00499b";
+        var apiUrl3 = "https://api.openweathermap.org/data/2.5/forecast?q="+city+"&units=imperial&appid=4cbd25328987295e23b007fb7a00499b";
 
         //make a get request to url
         fetch(apiUrl3)
