@@ -85,6 +85,7 @@ var displayTodaysWeather = function(weather, location){
     humidEl.textContent ="Humidity: "+weather.current.humidity;
     uvEl.textContent ="UV Index: "+ weather.current.uvi;
 
+    cityWeatherEl.innerHTML= "";
     cityWeatherEl.classList= "city-weather";
 
     cityWeatherEl.appendChild(cityEl);
