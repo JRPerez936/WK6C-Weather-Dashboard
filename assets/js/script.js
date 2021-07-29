@@ -25,7 +25,25 @@ var formSubmitHandler = function(event){
 var savedSubmitHandler = function(city){
   var cityName= city.textContent;
   if(cityName){
-      getLatLon(cityName);
+    //format openWeather api url
+    var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q="+cityName+"&units=imperial&appid=4cbd25328987295e23b007fb7a00499b";
+
+    //make a get request to url
+    fetch(apiUrl)
+    .then(function(response) {
+        // request was successful
+        if (response.ok) {
+          response.json().then(function(data) {
+            getTodaysWeather(data, cityName);
+            get5DWeather(cityName);
+          });
+        } else {
+          alert("Error: " + response.statusText);
+        }
+      })
+      .catch(function(error) {
+        alert("Unable to connect to OpenWeather");
+      });
   }
 };
 
@@ -90,7 +108,7 @@ var displayTodaysWeather = function(weather, location){
     var iconEl = document.createElement("img");
 
     iconEl.setAttribute("src","https://openweathermap.org/img/wn/"+weather.current.weather[0].icon+".png");
-    console.log(iconEl);
+
     //set the text of the weather elements
     cityEl.textContent = location + " " + timeEl;
     cityEl.appendChild(iconEl);
@@ -139,7 +157,6 @@ var display5DWeather = function(weather){
     city5DEl.innerHTML = "";
     
     for(var i = 0; i<=5; i++){
-        console.log(weather);
         var date= document.createElement("p");
         var temp= document.createElement("p");
         var wind= document.createElement("p");
