@@ -3,7 +3,7 @@ var cityInputEl = document.querySelector("#city");
 var prevSearchEl = document.querySelector("#prev-search");
 var cityWeatherEl = document.querySelector("#weather-today");
 var city5DEl = document.querySelector("#forecast5");
-
+var prevSearches = [];
 var formSubmitHandler = function(event){
     // prevent page from refreshing
     event.preventDefault();
@@ -32,6 +32,8 @@ var getLatLon = function(city){
           response.json().then(function(data) {
             getTodaysWeather(data, city);
             get5DWeather(city);
+            prevSearches.push(city);
+            saveSearches();
           });
         } else {
           alert("Error: " + response.statusText);
@@ -152,5 +154,19 @@ var createPrevButtons= function(city){
     button.setAttribute("type", "submit");
     prevSearchEl.appendChild(button);
 };
-
+function saveSearches(){
+    localStorage.setItem("previous-searches", JSON.stringify(prevSearches));
+}
+function loadSearches(){
+    var savedSearches = localStorage.getItem("previous-searches");
+    if(!savedSearches){
+        prevSearches = [];
+        return false;
+    }
+    prevSearches = JSON.parse(savedSearches);
+    for(var i = 0; i<prevSearches.length;i++){
+        createPrevButtons(prevSearches[i]);
+    }
+}
+loadSearches();
 userFormEl.addEventListener("submit", formSubmitHandler);
