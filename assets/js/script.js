@@ -169,7 +169,7 @@ var display5DWeather = function(weather){
     
     city5DEl.innerHTML = "";
     
-    for(var i = 0; i<=5; i++){
+    for(var i = 7; i<=35; i+=7){
         var date= document.createElement("p");
         var temp= document.createElement("p");
         var wind= document.createElement("p");
@@ -189,7 +189,6 @@ var display5DWeather = function(weather){
         day5El.appendChild(temp);
         day5El.appendChild(wind);
         day5El.appendChild(humidity);
-
         city5DEl.appendChild(day5El);
     }
 };
