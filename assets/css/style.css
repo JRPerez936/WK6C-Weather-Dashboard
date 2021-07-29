@@ -20,6 +20,10 @@
     box-shadow: 1px 1px var(--dark);
     transform: translate(-1px, -1px);
 }
+.saved-btn{
+    color: black;
+    background-color: var(--gray);
+}
 .card {
     margin: 0 0 20px 0;
     border: none;
@@ -49,4 +53,5 @@
 .col-sm-2{
     background-color: #33475a;
     color: white;
+    border: 4px solid white;
 }

@@ -13,6 +13,7 @@ var formSubmitHandler = function(event){
 
     if(cityName){
         getLatLon(cityName);
+        createPrevButtons(cityName);
     }
     else{
         alert("Please enter a city");
@@ -28,9 +29,7 @@ var getLatLon = function(city){
     .then(function(response) {
         // request was successful
         if (response.ok) {
-          console.log(response);
           response.json().then(function(data) {
-              console.log(data);
             getTodaysWeather(data, city);
             get5DWeather(city);
           });
@@ -65,19 +64,21 @@ var getTodaysWeather = function(weather, location){
 };
 
 var displayTodaysWeather = function(weather, location){
+    console.log(weather);
     //check if api returned info
     if(weather.length === 0){
         cityWeatherEl.textContent = "No data found.";
     }
     //initialize variables where info will be shared
     var cityEl = document.createElement("h1");
+    var timeEl = moment.unix(weather.current.dt).format("MM/DD/YYYY");
     var tempEl = document.createElement("h3");
     var windEl = document.createElement("h3");
     var humidEl = document.createElement("h3");
     var uvEl = document.createElement("h3");
 
     //set the text of the weather elements
-    cityEl.textContent = location;
+    cityEl.textContent = location + " " + timeEl;
     tempEl.textContent ="Temp: "+weather.current.temp+ "°F";
     windEl.textContent ="Wind: "+weather.current.wind_speed+ " MPH";
     humidEl.textContent ="Humidity: "+weather.current.humidity + "%";
@@ -119,7 +120,7 @@ var display5DWeather = function(weather){
     if(weather.length === 0){
         city5DEl.textContent = "No data found.";
     }
-    console.log(weather);
+    
     city5DEl.innerHTML = "";
     
     for(var i = 0; i<=5; i++){
@@ -128,7 +129,7 @@ var display5DWeather = function(weather){
         var wind= document.createElement("p");
         var humidity= document.createElement("p");
 
-        date.textContent = weather.list[i].dt;
+        date.textContent = moment.unix(weather.list[i].dt).format("MM/DD/YYYY");
         temp.textContent = "Temp: "+ weather.list[i].main.temp + "°F";
         wind.textContent = "Wind: "+ weather.list[i].wind.speed + " MPH";
         humidity.textContent = "Humidity: "+ weather.list[i].main.humidity + "%";
@@ -143,4 +144,13 @@ var display5DWeather = function(weather){
         city5DEl.appendChild(day5El);
     }
 };
+
+var createPrevButtons= function(city){
+    var button= document.createElement("button");
+    button.textContent = city;
+    button.classList= "btn saved-btn";
+    button.setAttribute("type", "submit");
+    prevSearchEl.appendChild(button);
+};
+
 userFormEl.addEventListener("submit", formSubmitHandler);
