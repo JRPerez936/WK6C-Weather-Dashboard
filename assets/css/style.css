@@ -46,3 +46,7 @@
 .col-12 {
     flex: 0 0 100%;
 }
+.col-sm-2{
+    background-color: #33475a;
+    color: white;
+}
