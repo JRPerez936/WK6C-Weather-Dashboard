@@ -1,9 +1,11 @@
 var userFormEl = document.querySelector("#user-form");
 var cityInputEl = document.querySelector("#city");
 var prevSearchEl = document.querySelector("#prev-search");
+var searchedCityButtonEl= document.querySelector("#searched-city");
 var cityWeatherEl = document.querySelector("#weather-today");
 var city5DEl = document.querySelector("#forecast5");
 var prevSearches = [];
+
 var formSubmitHandler = function(event){
     // prevent page from refreshing
     event.preventDefault();
@@ -18,6 +20,13 @@ var formSubmitHandler = function(event){
     else{
         alert("Please enter a city");
     }
+};
+
+var savedSubmitHandler = function(city){
+  var cityName= city.textContent;
+  if(cityName){
+      getLatLon(cityName);
+  }
 };
 
 var getLatLon = function(city){
@@ -151,7 +160,8 @@ var createPrevButtons= function(city){
     var button= document.createElement("button");
     button.textContent = city;
     button.classList= "btn saved-btn";
-    button.setAttribute("type", "submit");
+    button.setAttribute("onclick", "savedSubmitHandler("+button.textContent+")");
+    button.setAttribute("id", city);
     prevSearchEl.appendChild(button);
 };
 function saveSearches(){
