@@ -12,7 +12,6 @@ var formSubmitHandler = function(event){
     var cityName= cityInputEl.value.trim();
 
     if(cityName){
-
         getLatLon(cityName);
     }
     else{
