@@ -1,4 +1,4 @@
-# WK6C-Weather-Dashboard
+# Weather-Dashboard
 
 This is the Website Horiseon, designed to inform visitors about the weather in an area that they search for. On the right the user can see once they hit search the results of the weather today and the 5 day forecast which includes an icon for the weather that day, temperature, humidity and wind. Below is an example of what the website looks like: </br>
 
